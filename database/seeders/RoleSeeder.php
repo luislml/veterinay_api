@@ -1,0 +1,285 @@
+<?php
+
+namespace Database\Seeders;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class RoleSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // 1. Crear permisos
+        $permissions = [
+            'view any plans',
+            'view plans',
+            'create plans',
+            'update plans',
+            'delete plans',
+            'view any veterinaries',
+            'view veterinaries',
+            'create veterinaries',
+            'update veterinaries',
+            'delete veterinaries',
+            'restore veterinaries',
+            'view any addresses',
+            'view addresses',
+            'create addresses',
+            'update addresses',
+            'delete addresses',
+            'view any schedules',
+            'view schedules',
+            'create schedules',
+            'update schedules',
+            'delete schedules',
+            'view any configurations',
+            'view configurations',
+            'create configurations',
+            'update configurations',
+            'delete configurations',
+            'view any pets',
+            'view pets',
+            'create pets',
+            'update pets',
+            'delete pets',
+            'restore pets',
+            'view any reservations',
+            'view reservations',
+            'create reservations',
+            'update reservations',
+            'delete reservations',
+            'view any users',
+            'view users',
+            'create users',
+            'update users',
+            'delete users',
+            'restore users',
+            'view any clients',
+            'view clients',
+            'create clients',
+            'update clients',
+            'delete clients',
+            'restore clients',
+            'view any pets',
+            'view pets',
+            'create pets',
+            'update pets',
+            'delete pets',
+            'view any type-pets',
+            'view type-pets',
+            'create type-pets',
+            'update type-pets',
+            'delete type-pets',
+            'view any races',
+            'view races',
+            'create races',
+            'update races',
+            'delete races',
+            'view any vaccines',
+            'view vaccines',
+            'create vaccines',
+            'update vaccines',
+            'delete vaccines',
+            'view any consultations',
+            'view consultations',
+            'create consultations',
+            'update consultations',
+            'delete consultations',
+            'view any files',
+            'view files',
+            'create files',
+            'update files',
+            'delete files',
+            'view any advertisings',
+            'view advertisings',
+            'create advertisings',
+            'update advertisings',
+            'delete advertisings',
+            'view any promotions',
+            'view promotions',
+            'create promotions',
+            'update promotions',
+            'delete promotions',
+            'view any products',
+            'view products',
+            'create products',
+            'update products',
+            'delete products',
+            'view any sales',
+            'view sales',
+            'create sales',
+            'update sales',
+            'delete sales',
+            'view any shoppings',
+            'view shoppings',
+            'create shoppings',
+            'update shoppings',
+            'delete shoppings',
+            'view any movements',
+            'view movements',
+            'create movements',
+            'update movements',
+            'delete movements',
+            'view any advertisements',
+            'view advertisements',
+            'create advertisements',
+            'update advertisements',
+            'delete advertisements',
+            'download advertisements',
+
+            'view any content-veterinaries',
+            'view content-veterinaries',
+            'create content-veterinaries',
+            'update content-veterinaries',
+            'delete content-veterinaries',
+
+            'view any image-veterinaries',
+            'view image-veterinaries',
+            'create image-veterinaries',
+            'update image-veterinaries',
+            'delete image-veterinaries',
+
+            'reports sales',
+            'reports shoppings',
+            'reports consultations',
+
+            'view dashboard'
+        ];
+
+        foreach ($permissions as $perm) {
+            Permission::firstOrCreate(['name' => $perm]);
+        }
+
+        // 2. Crear roles
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $veterinary = Role::firstOrCreate(['name' => 'veterinary']);
+        $user = Role::firstOrCreate(['name' => 'user']);
+
+        // 3. Asignar permisos por rol
+
+        // Admin — acceso total
+        $admin->givePermissionTo($permissions);
+
+        // Veterinary — permisos intermedios
+        $veterinary->givePermissionTo([
+            'view any addresses',
+            'view addresses',
+            'create addresses',
+            'update addresses',
+            'delete addresses',
+            'view any schedules',
+            'view schedules',
+            'create schedules',
+            'update schedules',
+            'delete schedules',
+            'view any configurations',
+            'view configurations',
+            //'create configurations',
+            'update configurations',
+            //'delete configurations',
+            'view any clients',
+            'view clients',
+            'create clients',
+            'update clients',
+            'delete clients',
+            'restore clients',
+            'view any pets',
+            'view pets',
+            'create pets',
+            'update pets',
+            'delete pets',
+            'restore pets',
+            'view any type-pets',
+            'view type-pets',
+            'create type-pets',
+            'update type-pets',
+            'delete type-pets',
+            'view any races',
+            'view races',
+            'create races',
+            'update races',
+            'delete races',
+            'view any vaccines',
+            'view vaccines',
+            'create vaccines',
+            'update vaccines',
+            'delete vaccines',
+            'view any consultations',
+            'view consultations',
+            'create consultations',
+            'update consultations',
+            'delete consultations',
+            'view any files',
+            'view files',
+            'create files',
+            'update files',
+            'delete files',
+            'view any advertisings',
+            'view advertisings',
+            'create advertisings',
+            'update advertisings',
+            'delete advertisings',
+            'view any promotions',
+            'view promotions',
+            'create promotions',
+            'update promotions',
+            'delete promotions',
+            'view any products',
+            'view products',
+            'create products',
+            'update products',
+            'delete products',
+            'view any sales',
+            'view sales',
+            'create sales',
+            'update sales',
+            'delete sales',
+            'view any shoppings',
+            'view shoppings',
+            'create shoppings',
+            'update shoppings',
+            'delete shoppings',
+
+            'view any movements',
+            'view movements',
+            'create movements',
+            'update movements',
+            'delete movements',
+
+            'view any advertisements',
+            'view advertisements',
+            'create advertisements',
+            'update advertisements',
+            'delete advertisements',
+            'download advertisements',
+
+            'view any content-veterinaries',
+            'view content-veterinaries',
+            'create content-veterinaries',
+            'update content-veterinaries',
+            'delete content-veterinaries',
+
+            'view any image-veterinaries',
+            'view image-veterinaries',
+            //'create image-veterinaries',
+            'update image-veterinaries',
+            //'delete image-veterinaries',
+
+            'reports sales',
+            'reports shoppings',
+            'reports consultations',
+
+            'view dashboard'
+        ]);
+
+        // User — solo permisos básicos
+        $user->givePermissionTo([
+            'view dashboard'
+        ]);
+    }
+}
